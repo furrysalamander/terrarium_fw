@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terrarium Lights</title>
+  <link rel="stylesheet" href="/assets/main.css?v=2">
+  <script defer src="/assets/app.js?v=2"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Terrarium Lighting Suite</h1>
+    <div class="grid">
+      <section class="card">
+        <h2>Brightness</h2>
+        <div class="slider-stack">
+          <div class="slider-row">
+            <div class="slider-container" id="brightnessSlider">
+              <div class="slider-track"></div>
+              <div class="slider-fill" id="sliderFill"></div>
+              <div class="slider-handle" id="sliderHandle"></div>
+            </div>
+            <div class="slider-value" id="brightnessValue">{{BRIGHTNESS}}%</div>
+          </div>
+          <div class="inputs-inline">
+            <div>
+              <label for="brightnessInput">Exact percentage</label>
+              <input type="number" min="0" max="100" id="brightnessInput" value="{{BRIGHTNESS}}">
+            </div>
+            <div>
+              <p class="status">Light output <strong id="lightStatus">Loading...</strong></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="card">
+        <h2>Schedule</h2>
+        <form method="POST" action="/schedule" id="scheduleForm">
+          <label class="checkbox">
+            <input type="checkbox" name="enabled" value="1" {{SCHEDULE_CHECKED}}>
+            Enable automated schedule
+          </label>
+          <div class="schedule-grid">
+            <div>
+              <label for="onTime">On time</label>
+              <input type="time" name="onTime" id="onTime" value="{{ON_TIME}}" required>
+            </div>
+            <div>
+              <label for="offTime">Off time</label>
+              <input type="time" name="offTime" id="offTime" value="{{OFF_TIME}}" required>
+            </div>
+          </div>
+          <div class="option-grid">
+            <div>
+              <label for="timezoneDisplay">Timezone (auto)</label>
+              <input type="text" id="timezoneDisplay" value="Auto {{TIMEZONE_LABEL}}" readonly>
+              <input type="hidden" id="timezoneOffset" value="{{TIMEZONE_OFFSET}}">
+            </div>
+          </div>
+          <button type="submit">Save schedule</button>
+        </form>
+        <p class="status">Status <strong id="scheduleStatus">Loading...</strong></p>
+      </section>
+      <section class="card">
+        <h2>Device</h2>
+        <p class="status">IP address <strong>{{LOCAL_IP}}</strong></p>
+        <p class="status">Network <strong id="wifiStatus">Checking...</strong></p>
+        <p class="status">Clock synced <strong id="clockStatus">Checking...</strong></p>
+        <p class="status">Local time <strong id="localClock">--:--</strong></p>
+        <p class="status">Last update <strong id="lastUpdate">--</strong></p>
+        <button type="button" id="portalButton">Launch Wi-Fi Setup</button>
+        <p class="status">Captive portal <strong id="portalStatus">Idle</strong></p>
+        <p class="status" id="portalInstructions">{{PORTAL_INSTRUCTIONS}}</p>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

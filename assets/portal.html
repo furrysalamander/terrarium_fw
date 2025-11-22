@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wi-Fi Setup</title>
+  <link rel="stylesheet" href="/assets/portal.css">
+  <script defer src="/assets/portal.js"></script>
+</head>
+<body>
+  <div class="panel">
+    <h1>Configure Wi-Fi</h1>
+    <p>Use this page to store the home network credentials. Once saved, the controller will reboot and attempt to join your Wi-Fi.</p>
+    <p class="note">Current setup hotspot: <strong>{{PORTAL_SSID}}</strong><br>Hotspot password: <strong>{{PORTAL_PASSWORD}}</strong></p>
+    <form method="POST" action="/portal/save">
+      <label for="ssidSelect">Pick a detected network</label>
+      <select id="ssidSelect">
+        <option value="" disabled selected hidden>Select network</option>
+        {{NETWORK_OPTIONS}}
+      </select>
+      <label for="ssid">Wi-Fi Name (SSID)</label>
+      <input type="text" id="ssid" name="ssid" maxlength="32" required>
+      <label for="password">Wi-Fi Password</label>
+      <input type="password" id="password" name="password" maxlength="63" required>
+      <button type="submit">Save &amp; Reboot</button>
+    </form>
+    <p class="note">If your network is hidden, leave the dropdown untouched and type the SSID manually.</p>
+  </div>
+</body>
+</html>
